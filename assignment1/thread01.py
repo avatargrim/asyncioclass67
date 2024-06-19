@@ -4,11 +4,11 @@ from threading import Thread
 
 def task():
     sleep(1)
-    print(f'(ctime()) This is from another thread')
+    print(f'{ctime()} This is from another thread')
 
 thread=Thread(target=task)
 
 thread.start()
 
-print(f'(ctime()) Waiting for the thread...')
+print(f'{ctime()} Waiting for the thread...')
 thread.join()
