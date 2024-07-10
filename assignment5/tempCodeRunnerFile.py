@@ -1,1 +1,1 @@
-asyncio.run(main())
+1
