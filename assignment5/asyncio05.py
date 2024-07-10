@@ -23,13 +23,13 @@ async def noodle():
     return value
 
 async def main():
-    start = time()
     tasks = [asyncio.create_task(rice(), name="rice"),asyncio.create_task(noodle(), name="noodle"),asyncio.create_task(curry(), name="curry") ]
     done,pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
     
+    print(f"Complete task: {len(done)}")
+    print(f"UnComplete task: {len(pending)}")
     first = done.pop()
-    finish = time() - start
     print(first.get_name(), "is complete")
-    print(first.get_name(),f'finish in {finish} sec')
+    print(first.get_name(),f'finish in {first.result()} sec')
 
 asyncio.run(main())
