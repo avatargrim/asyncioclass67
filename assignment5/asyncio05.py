@@ -3,26 +3,28 @@ import asyncio
 
 async def rice():
     value = random() + 1
+    print(f'Rice ready in {value} sec')
     await asyncio.sleep(value)
-    return f'Rice ready in {value} sec'
+    print(f'Rice ready is finish.')
 
 async def curry():
     value = random() + 1
+    print(f'Curry ready in {value} sec')
     await asyncio.sleep(value)
-    return f'Curry ready in {value} sec'
+    print(f'Curry ready is finish.')
  
 async def noodle():
     value = random() + 1
+    print(f'Noodle ready in {value} sec')
     await asyncio.sleep(value)
-    return f'Noodle ready in {value} sec'
+    print(f'Noodle ready is finish.')
 
 
 async def main():
-    tasks = [asyncio.create_task(rice()),asyncio.create_task(noodle()),asyncio.create_task(curry()) ]
+    tasks = [asyncio.create_task(rice(), name="rice"),asyncio.create_task(noodle(), name="noodle"),asyncio.create_task(curry(), name="curry") ]
     done,pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
     
-    for task in done:
-        print(task.result())
-
+    first = done.pop()
+    print(first.get_name(), "is complete")
 
 asyncio.run(main())
