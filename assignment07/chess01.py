@@ -21,7 +21,7 @@ def chess(num):
         move(30)
         print(f"{time.ctime()} - End game",game+1)
         elapsed = time.perf_counter() - start_game
-        print(f"{time.ctime()} chess game play ", elapsed*1000, "second.")
+        print(f"{time.ctime()} chess game play ", elapsed*10, "second.")
     return chess_game()
 
 def main():
@@ -31,4 +31,4 @@ if __name__ == "__main__":
     start_game = time.perf_counter()
     main()
     elapsed = time.perf_counter() - start_game
-    print(f"{time.ctime()} All chess game play ", (elapsed*1000)/60, "minutes.")
+    print(f"{time.ctime()} All chess game play ", elapsed, "second.")

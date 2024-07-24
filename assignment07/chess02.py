@@ -7,29 +7,30 @@ class chess_game:
 class chess_move:
     pass
 
-def move(play):
-    for i in range(play):
-        print("opponent move chess")
-        time.sleep(0.05)
-        print("Judit move chess")
-        time.sleep(0.01)
-    return chess_move    
 
-def chess(num):
-    for game in range(num):
-        start_game = time.perf_counter()
-        print(f"{time.ctime()} - Begin game",game+1)
-        move(30)
-        print(f"{time.ctime()} - End game",game+1)
-        elapsed = time.perf_counter() - start_game
-        print(f"{time.ctime()} chess game play ", elapsed*1000, "second.")
+async def chess(num):
+    print(f"Begin game",num+1)
+    for game in range(moves):
+        print("judit", game+1)
+        time.sleep(judit)
+        print("opponent", game+1)
+        await asyncio.sleep(opponent)
     return chess_game()
 
-def main():
-    chess(24)
+async def main():
+    coros = [chess(i) for i in range(total_opponent)]
+
+    await asyncio.gather(*coros)
+
 
 if __name__ == "__main__":
     start_game = time.perf_counter()
-    main()
+    judit = 0.1
+    opponent = 0.5
+    moves = 30
+    total_opponent = 24
+    
+    asyncio.run(main())
+
     elapsed = time.perf_counter() - start_game
-    print(f"{time.ctime()} All chess game play ", (elapsed*1000)/60, "minutes.")
+    print(f"All chess game play {round(elapsed)} second")

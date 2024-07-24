@@ -1,16 +1,21 @@
 import aiofiles
 import asyncio
 import json
-from pathlib import Path
 
-pokemonapi_directory = 'asyncioclass67_6510301044/assignment07/pokemon/pokemonapi'
-pokemonmove_directory = 'asyncioclass67_6510301044/assignment07/pokemon/pokemonmove'
+pokemonapi_directory = 'asyncioclass67/assignment07/pokemon/pokemonapi'
+pokemonmove_directory = 'asyncioclass67/assignment07/pokemon/pokemonmove'
 
 async def main():
-    pathlist = Path(pokemonapi_directory).glob('*.json')
+    #Read the contents of the json file.
+    async with aiofiles.open(f'{pokemonapi_directory}/articuno.json',mode='r') as f:
+        contents = await f.read()
+    
+    pokemon = json.loads(contents)
+    name = pokemon['name']
+    moves = [move['move']['name'] for move in pokemon['moves']]
+    print(moves)
 
-    # Iterate through all json files in the directory.
-    for path in pathlist:
-        print(path)
+    async with aiofiles.open(f'{pokemonmove_directory}/{name}_moves.txt',mode='w')as f:
+        await f.write('\n'.join(moves))
 
 asyncio.run(main())
