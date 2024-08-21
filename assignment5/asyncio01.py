@@ -15,7 +15,7 @@ async def main():
     #create many task
     tasks = [asyncio.create_task(task_coro(i)) for i in range(10) ]
     #wait for all tasks to complete
-    dine,pending = await asyncio.wait(tasks)
+    done,pending = await asyncio.wait(tasks)
     #report results
     print('All Done')
 #start the syncio program

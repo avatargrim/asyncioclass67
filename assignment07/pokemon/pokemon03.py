@@ -13,6 +13,7 @@ async def main():
     pokemon = json.loads(contents)
     name = pokemon['name']
     moves = [move['move']['name'] for move in pokemon['moves']]
+    print(name)
     print(moves)
 
     async with aiofiles.open(f'{pokemonmove_directory}/{name}_moves.txt',mode='w')as f:
